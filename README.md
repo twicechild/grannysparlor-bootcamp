@@ -67,12 +67,12 @@ there's no rush.
 
 | Phase | Tool | What You'll Do | Rough Time |
 |-------|------|----------------|------------|
-| 1 | Docker | Containerize the app, run it locally with Postgres | ~4-5h |
-| 2 | Terraform | Provision AWS infrastructure (VPC, EC2, S3) | ~4-5h |
-| 3 | Ansible | Configure the server and deploy the app | ~4-5h |
-| 4 | GitHub Actions | Automate the whole pipeline | ~3-4h |
+| 1 | Docker | Containerize the app, run it locally with Postgres | ~6-8h |
+| 2 | Terraform | Provision AWS infrastructure (VPC, EC2, S3) | ~6-8h |
+| 3 | Ansible | Configure the server and deploy the app | ~6-8h |
+| 4 | GitHub Actions | Automate the whole pipeline | ~4-6h |
 
-These are rough estimates — some phases might take you 2 hours, some might
+These are rough estimates — some phases might take you 3 hours, some might
 take a week. That's fine. Life happens. Take a break, come back when you're
 ready. The AWS Free Tier isn't going anywhere.
 
