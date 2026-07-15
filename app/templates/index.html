@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenLeaf Recipes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+    <main class="container">
+        <h1>GreenLeaf Recipes</h1>
+
+        <h2>Add a Recipe</h2>
+        <form id="recipe-form">
+            <label for="title">Title
+                <input type="text" id="title" name="title" required>
+            </label>
+            <label for="ingredients">Ingredients
+                <textarea id="ingredients" name="ingredients" rows="4" required></textarea>
+            </label>
+            <label for="instructions">Instructions
+                <textarea id="instructions" name="instructions" rows="4" required></textarea>
+            </label>
+            <button type="submit">Add Recipe</button>
+        </form>
+
+        <h2>Recipes</h2>
+        {% if recipes %}
+        <article>
+            {% for recipe in recipes %}
+            <details>
+                <summary>{{ recipe[1] }}</summary>
+                <p><strong>Added:</strong> {{ recipe[4].strftime('%Y-%m-%d %H:%M') }}</p>
+                <h3>Ingredients</h3>
+                <p>{{ recipe[2] }}</p>
+                <h3>Instructions</h3>
+                <p>{{ recipe[3] }}</p>
+            </details>
+            {% endfor %}
+        </article>
+        {% else %}
+        <p>No recipes yet. Add one above!</p>
+        {% endif %}
+    </main>
+
+    <script>
+        document.getElementById('recipe-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = {
+                title: formData.get('title'),
+                ingredients: formData.get('ingredients'),
+                instructions: formData.get('instructions')
+            };
+            const res = await fetch('/recipes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (res.ok) {
+                window.location.reload();
+            } else {
+                alert('Failed to add recipe. Check the console.');
+                console.error(await res.text());
+            }
+        });
+    </script>
+</body>
+</html>
