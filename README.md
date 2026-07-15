@@ -7,67 +7,81 @@
 
 ## What This Is
 
-A hands-on DevOps exercise built around a realistic scenario. You'll take a
-working Flask application and deploy it to AWS using industry-standard tools —
-all within the AWS Free Tier (zero cost).
+A hands-on DevOps exercise built around a fun scenario. You'll take a working
+Flask application and deploy it to AWS — all within the Free Tier (zero cost).
 
-You'll work through four phases, each building on the previous one:
-
-| Phase | Tool | What You'll Do | Est. Time |
-|-------|------|----------------|-----------|
-| 1 | Docker | Containerize the app, run it locally with Postgres | 4-5h |
-| 2 | Terraform | Provision AWS infrastructure (VPC, EC2, S3) | 4-5h |
-| 3 | Ansible | Configure the server and deploy the app | 4-5h |
-| 4 | GitHub Actions | Automate the whole pipeline | 3-4h |
-
-**Total: ~15-19 hours.** Designed for ~5 hours/week over 4 weeks.
+No deadlines. No pressure. Work at your own pace, take breaks, come back when
+you feel like it. This is about exploring and learning, not racing.
 
 ---
 
 ## The Scenario
 
-### Client Brief: GreenLeaf Recipes
+Here's the setup — you've been approached by a small startup:
 
-> **From:** Maria @ GreenLeaf Recipes
-> **Date:** July 2026
-> **Subject:** We need our recipe app online — help?
->
-> Hi,
->
-> We're GreenLeaf — a small startup building a recipe sharing platform. Our
-> developer built the backend in Python but left last week and we need to get
-> it online ASAP. We have the code but no idea how to deploy it.
->
-> Here's what we need:
->
-> - The app needs to be accessible on the internet, just a URL people can visit
-> - It stores recipes in a database — we can't lose any data if the server restarts
-> - We're pre-funding so budget is basically zero for now, but we'll scale once we get users
-> - Our team needs to push updates without calling someone every time — we update the recipes API pretty often
-> - It has to be secure — our last dev said something about "not running as root"?
-> - We work from different laptops and sometimes from home, so whatever you set up needs to be shareable
-> - If something goes wrong, we need to be able to tear it all down and start over cleanly — we've been burned before
-> - Oh, and we'd like some way to know the app is actually running, not just guessing
->
-> We're hoping to have this live within a month. Is that doable?
->
-> Thanks,
-> Maria
+---
+
+**From:** Maria @ GreenLeaf Recipes
+**Date:** July 2026
+**Subject:** We need our recipe app online — help?
+
+Hi,
+
+We're GreenLeaf — a small startup building a recipe sharing platform. Our
+developer built the backend in Python but left last week and we need to get it
+online ASAP. We have the code but no idea how to deploy it.
+
+Here's what we need:
+
+- The app needs to be accessible on the internet, just a URL people can visit
+- It stores recipes in a database — we can't lose any data if the server restarts
+- We're pre-funding so budget is basically zero for now, but we'll scale once we get users
+- Our team needs to push updates without calling someone every time — we update the recipes API pretty often
+- It has to be secure — our last dev said something about "not running as root"?
+- We work from different laptops and sometimes from home, so whatever you set up needs to be shareable
+- If something goes wrong, we need to be able to tear it all down and start over cleanly — we've been burned before
+- Oh, and we'd like some way to know the app is actually running, not just guessing
+
+We're hoping to have this live within a month. Is that doable?
+
+Thanks,
+Maria
+
+---
 
 ### Your Job
 
 Read the brief. Figure out what tools and techniques solve each of Maria's
 requirements. Then build it — phase by phase.
 
-The brief never mentions Docker, Terraform, Ansible, or CI/CD. That's the point.
-Real clients describe problems, not solutions. Your job is to translate.
+Notice something? The brief never mentions Docker, Terraform, Ansible, or
+CI/CD. That's the point. Real clients describe problems, not solutions.
+Your job is to translate.
+
+---
+
+## The Phases
+
+Four phases, each building on the previous one. Take your time with each —
+there's no rush.
+
+| Phase | Tool | What You'll Do | Rough Time |
+|-------|------|----------------|------------|
+| 1 | Docker | Containerize the app, run it locally with Postgres | ~4-5h |
+| 2 | Terraform | Provision AWS infrastructure (VPC, EC2, S3) | ~4-5h |
+| 3 | Ansible | Configure the server and deploy the app | ~4-5h |
+| 4 | GitHub Actions | Automate the whole pipeline | ~3-4h |
+
+These are rough estimates — some phases might take you 2 hours, some might
+take a week. That's fine. Life happens. Take a break, come back when you're
+ready. The AWS Free Tier isn't going anywhere.
 
 ---
 
 ## What's Provided
 
-The Flask application is **complete and ready to deploy**. You do not need to
-modify it. It lives in `app/`:
+The Flask application is **complete and ready to deploy**. You don't need to
+modify it — it's just the payload you'll be deploying. It lives in `app/`:
 
 ```
 app/
@@ -77,7 +91,7 @@ app/
     └── index.html       # UI — recipe list + add form (Pico.css)
 ```
 
-**App endpoints:**
+**What the app does:**
 
 | Method | Path | Purpose |
 |--------|------|---------|
@@ -102,7 +116,7 @@ app/
 
 ## What You Build
 
-Everything outside `app/`:
+Everything outside `app/` is yours to create:
 
 ```
 greenleaf-bootcamp/
@@ -135,9 +149,9 @@ greenleaf-bootcamp/
 
 ---
 
-## Prerequisites
+## Before You Start
 
-Before you start, make sure you have:
+You'll need a few accounts and tools set up. Nothing costs money:
 
 - [ ] An AWS account (Free Tier — [sign up here](https://aws.amazon.com/free/))
 - [ ] A Docker Hub account (free — [sign up here](https://hub.docker.com/))
@@ -149,7 +163,7 @@ Before you start, make sure you have:
 
 ---
 
-## Free Tier — Zero Cost Guarantee
+## Free Tier — Zero Cost
 
 This project is designed to cost **$0/month** on AWS. Here's the breakdown:
 
@@ -161,9 +175,9 @@ This project is designed to cost **$0/month** on AWS. Here's the breakdown:
 | GitHub Actions | 2,000 min/month (private repos) | ~5-10 min/run |
 | Docker Hub | Unlimited public repos | 1 repo |
 
-**Golden rule:** Run `terraform destroy` when you're not actively working.
-This ensures you never exceed Free Tier limits. The only time you need
-infrastructure up is during Phase 3 (Ansible) and Phase 4 (CI/CD) testing.
+**One habit to build:** Run `terraform destroy` when you're done for the day.
+This keeps you safely within Free Tier limits. You only need the infrastructure
+up during Phase 3 (Ansible) and Phase 4 (CI/CD) testing.
 
 ---
 
@@ -174,19 +188,18 @@ infrastructure up is during Phase 3 (Ansible) and Phase 4 (CI/CD) testing.
 3. **Build** the deliverables for that phase
 4. **Check the Definition of Done** — tick every box before moving on
 5. **Commit your work** — use conventional commits (`feat(docker): add multi-stage Dockerfile`)
-6. **Move to the next phase** only when the current one is fully done
+6. **Move to the next phase** only when you're happy with the current one
 
-You work independently. If you get stuck, that's part of the process —
-research, read docs, try things. The phase docs include hints and common
-gotchas to help you past the usual walls.
+If you get stuck, that's part of the process — research, read docs, try things.
+The phase docs include hints and common gotchas to help you past the usual walls.
 
 ---
 
 ## Bonus Challenges
 
-Finished early? Hungry for more? Check [`BONUS.md`](BONUS.md) for advanced
-challenges that build on what you've done — managed databases, reverse proxies,
-secrets management, and more.
+Finished early? Curious about what's next? Check [`BONUS.md`](BONUS.md) for
+advanced challenges — managed databases, reverse proxies, secrets management,
+and more. All framed as "Maria got funding and needs to scale."
 
 ---
 
