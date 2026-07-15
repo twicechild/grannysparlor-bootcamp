@@ -88,6 +88,9 @@ config. Research this, it's a common real-world pattern.
 - Use `data "aws_ami"` to find the latest Amazon Linux 2023 AMI
 - User data script: install Docker and docker-compose-plugin
 - The user data runs as root on first boot — perfect for Docker install
+- **Package manager:** Amazon Linux 2023 uses `dnf`, not `yum` or `apt`.
+  Your networking/sysadmin background will help here — it's a Fedora-based
+  distro. Check the Docker docs for the AL2023-specific install steps.
 
 ### 5. `terraform/outputs.tf` — Outputs
 

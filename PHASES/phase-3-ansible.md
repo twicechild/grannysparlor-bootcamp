@@ -76,13 +76,13 @@ Deploys the Flask app container on the server.
 **Tasks:**
 - [ ] Create a directory for the app (e.g., `/opt/greenleaf`)
 - [ ] Template a `docker-compose.yml` file from a Jinja2 template
-      (this is the PRODUCTION compose — different from your local one:
-      no port mapping on 8000, expose on port 80 instead, no `db` service
-      since Postgres runs in a container on the same host but configured
-      for production)
 - [ ] Pull the latest image from Docker Hub
 - [ ] Run `docker compose up -d` to start the app
 - [ ] Wait for the app to be healthy (poll `/health` endpoint)
+
+**Hint:** This is NOT your Phase 1 compose. No `build` section — you pull
+a pre-built image from Docker Hub. Port mapping is `80:8000`. Variables come
+from Ansible (`{{ }}`), not hardcoded.
 
 **Template: `ansible/roles/app/templates/docker-compose.yml.j2`**
 

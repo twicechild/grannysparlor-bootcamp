@@ -52,6 +52,12 @@ this from scratch. Here are the requirements you must satisfy:
 - `pip install --no-cache-dir` keeps the image smaller
 - Use `USER` directive to switch to the non-root user
 - The healthcheck can use `curl` or Python's `urllib`
+- **Multi-stage pip:** In the builder stage, `pip install --user` puts
+  packages in `/root/.local`. In the runtime stage, copy that to the
+  non-root user's home and add it to `PATH`.
+- **Gunicorn loads the app differently than `python app.py`** — it imports
+  the module, it doesn't run `__main__`. Check how `init_db()` is called
+  in `app.py` and make sure it runs regardless of how the app starts.
 
 ### 2. `docker/docker-compose.yml`
 
@@ -71,8 +77,10 @@ Orchestrate the app and database together.
 **Hints:**
 - `DB_HOST` should be `db` (the service name — Docker DNS resolves it)
 - Use `depends_on` with `condition: service_healthy`
-- The build context should point to `../app` (where `app.py` lives)
-- The Dockerfile path is `./Dockerfile` relative to the `docker/` directory
+- Your Dockerfile is in `docker/` but the app code is in `app/`. The
+  compose `build` section needs a `context` (the directory Docker can
+  `COPY` from) and a `dockerfile` path. Pick the context so the Dockerfile
+  can reach `app.py` and `templates/`.
 
 ### 3. `docker/.dockerignore`
 
@@ -179,6 +187,6 @@ Phase 4 (CI/CD pushes new versions).
 - **App starts before DB is ready** — use `depends_on` with
   `condition: service_healthy`. The `pg_isready` healthcheck on the DB service
   is essential.
-- **`init_db()` not called** — make sure your CMD/ENTRYPOINT runs the app in a
-  way that triggers `init_db()`. If using gunicorn, you may need a startup script
-  that calls `init_db()` before starting gunicorn.
+- **`init_db()` not called under gunicorn** — gunicorn imports the module
+  instead of running `__main__`. If the first request crashes with
+  `relation "recipes" does not exist`, this is why.
