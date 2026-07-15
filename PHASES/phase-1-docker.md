@@ -42,8 +42,11 @@ this from scratch. Here are the requirements you must satisfy:
 - [ ] **Copy only what's needed** — `app.py`, `requirements.txt`, `templates/`
 - [ ] **Use gunicorn** — it's in `requirements.txt` for production serving
       (command: `gunicorn --bind 0.0.0.0:8000 app:app`)
-- [ ] **Initialize the DB on startup** — the app calls `init_db()` on startup,
-      make sure this happens before serving requests
+- [ ] **Initialize the DB on startup** — the app has `init_db()` and `seed_db()`
+      functions, but they're only called in `if __name__ == "__main__"`. Since
+      you're using gunicorn (which imports the module, doesn't run `__main__`),
+      you need to make sure these run before gunicorn starts serving. Think
+      about an entrypoint script or CMD that runs them first.
 
 **Hints:**
 - Use `python:3.12-slim` as your base image
@@ -55,9 +58,6 @@ this from scratch. Here are the requirements you must satisfy:
 - **Multi-stage pip:** In the builder stage, `pip install --user` puts
   packages in `/root/.local`. In the runtime stage, copy that to the
   non-root user's home and add it to `PATH`.
-- **Gunicorn loads the app differently than `python app.py`** — it imports
-  the module, it doesn't run `__main__`. Check how `init_db()` is called
-  in `app.py` and make sure it runs regardless of how the app starts.
 
 ### 2. `docker/docker-compose.yml`
 
@@ -188,5 +188,7 @@ Phase 4 (CI/CD pushes new versions).
   `condition: service_healthy`. The `pg_isready` healthcheck on the DB service
   is essential.
 - **`init_db()` not called under gunicorn** — gunicorn imports the module
-  instead of running `__main__`. If the first request crashes with
-  `relation "recipes" does not exist`, this is why.
+  instead of running `__main__`. The table never gets created, and the first
+  request crashes with `relation "recipes" does not exist`. The fix is in
+  your Dockerfile (entrypoint script), not in `app.py` — you're told not to
+  modify the app.

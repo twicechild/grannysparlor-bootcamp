@@ -86,14 +86,12 @@ from Ansible (`{{ }}`), not hardcoded.
 
 **Template: `ansible/roles/app/templates/docker-compose.yml.j2`**
 
-This is a Jinja2 template — different from your local compose file:
-
 **Requirements:**
 - [ ] `app` service using your Docker Hub image (not a build context)
-- [ ] `db` service using `postgres:16-alpine`
+- [ ] `db` service using `postgres:16-alpine` (same as Phase 1)
 - [ ] Named volume for Postgres data
 - [ ] App environment variables from Ansible variables (not hardcoded)
-- [ ] App port mapping: `80:8000` (Nginx would sit here in the bonus challenge)
+- [ ] App port mapping: `80:8000`
 - [ ] App depends on `db` being healthy
 - [ ] DB healthcheck with `pg_isready`
 - [ ] App restart policy: `unless-stopped`

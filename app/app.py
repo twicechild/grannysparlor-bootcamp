@@ -63,6 +63,38 @@ def init_db():
     conn.close()
 
 
+def seed_db():
+    """Add starter recipes if the table is empty."""
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT COUNT(*) FROM recipes")
+    count = cur.fetchone()[0]
+    if count == 0:
+        cur.executemany(
+            "INSERT INTO recipes (title, ingredients, instructions) VALUES (%s, %s, %s)",
+            [
+                (
+                    "Greek Salad",
+                    "tomatoes, cucumber, red onion, olives, feta, olive oil, oregano",
+                    "Chop vegetables, crumble feta, drizzle with olive oil, sprinkle oregano",
+                ),
+                (
+                    "Moussaka",
+                    "eggplant, ground beef, bechamel, potatoes, onions, cinnamon",
+                    "Layer eggplant and meat sauce, top with bechamel, bake 45 min at 180C",
+                ),
+                (
+                    "Tzatziki",
+                    "greek yogurt, cucumber, garlic, olive oil, dill, lemon",
+                    "Grate and drain cucumber, mix with yogurt and garlic, add oil and dill",
+                ),
+            ],
+        )
+        conn.commit()
+    cur.close()
+    conn.close()
+
+
 # ---------------------------------------------------------------------------
 # Routes — UI
 # ---------------------------------------------------------------------------
@@ -143,8 +175,7 @@ def create_recipe():
 # Entrypoint
 # ---------------------------------------------------------------------------
 
-# Initialize the database on import (works with both `python app.py` and gunicorn)
-init_db()
-
 if __name__ == "__main__":
+    init_db()
+    seed_db()
     app.run(host="0.0.0.0", port=8000)
