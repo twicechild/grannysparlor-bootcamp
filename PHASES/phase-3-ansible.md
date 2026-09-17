@@ -74,7 +74,7 @@ service status rather than blindly reinstalling.
 Deploys the Flask app container on the server.
 
 **Tasks:**
-- [ ] Create a directory for the app (e.g., `/opt/greenleaf`)
+- [ ] Create a directory for the app (e.g., `/opt/grannysparlor`)
 - [ ] Template a `docker-compose.yml` file from a Jinja2 template
 - [ ] Pull the latest image from Docker Hub
 - [ ] Run `docker compose up -d` to start the app
@@ -145,7 +145,7 @@ curl -X POST http://<ec2-public-ip>/recipes \
 
 # SSH in and restart the containers
 ssh -i ~/.ssh/your-key ec2-user@<ec2-public-ip>
-cd /opt/greenleaf
+cd /opt/grannysparlor
 docker compose down
 docker compose up -d
 exit

@@ -135,13 +135,13 @@ Once your image works locally, tag and push it:
 
 ```bash
 # Tag it
-docker tag <your-image-name> <your-dockerhub-username>/greenleaf:latest
+docker tag <your-image-name> <your-dockerhub-username>/grannysparlor:latest
 
 # Login
 docker login
 
 # Push
-docker push <your-dockerhub-username>/greenleaf:latest
+docker push <your-dockerhub-username>/grannysparlor:latest
 ```
 
 You'll need this image in Phase 3 (Ansible pulls it on the server) and
