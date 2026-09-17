@@ -36,7 +36,7 @@ S3 bucket to store state remotely.
 
 **Requirements:**
 - [ ] S3 bucket for Terraform state
-- [ ] Bucket name must be globally unique (e.g., `greenleaf-tfstate-<your-initials>`)
+- [ ] Bucket name must be globally unique (e.g., `grannysparlor-tfstate-<your-initials>`)
 - [ ] Bucket versioning enabled (so you can roll back state)
 - [ ] `backend "s3"` configuration in this file
 
@@ -166,7 +166,7 @@ terraform destroy
 ## Common Gotchas
 
 - **S3 bucket already exists** — bucket names are globally unique. If
-  `greenleaf-tfstate-abc` is taken, add more characters. Use a random suffix.
+  `grannysparlor-tfstate-abc` is taken, add more characters. Use a random suffix.
 - **SSH connection refused** — check the security group allows your IP on
   port 22. Also check your IP hasn't changed (home IPs can rotate).
 - **AMI not found** — AMI IDs are region-specific. Use the `data "aws_ami"`

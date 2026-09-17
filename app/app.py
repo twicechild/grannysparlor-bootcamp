@@ -1,5 +1,5 @@
 """
-GreenLeaf Recipes — Flask Application
+Granny's Parlor Recipes — Flask Application
 =======================================
 A simple recipe sharing platform. This is the application you will deploy.
 You do NOT need to modify this file — it is provided complete.
@@ -16,9 +16,9 @@ Table: recipes (id, title, ingredients, instructions, created_at)
 Configuration via environment variables:
   DB_HOST       — Postgres host (default: localhost)
   DB_PORT       — Postgres port (default: 5432)
-  DB_NAME       — Database name (default: greenleaf)
-  DB_USER       — Database user (default: greenleaf)
-  DB_PASSWORD   — Database password (default: greenleaf)
+  DB_NAME       — Database name (default: grannysparlor)
+  DB_USER       — Database user (default: grannysparlor)
+  DB_PASSWORD   — Database password (default: grannysparlor)
 """
 
 from __future__ import annotations
@@ -39,9 +39,9 @@ def get_db_connection():
     return psycopg2.connect(
         host=os.environ.get("DB_HOST", "localhost"),
         port=os.environ.get("DB_PORT", "5432"),
-        dbname=os.environ.get("DB_NAME", "greenleaf"),
-        user=os.environ.get("DB_USER", "greenleaf"),
-        password=os.environ.get("DB_PASSWORD", "greenleaf"),
+        dbname=os.environ.get("DB_NAME", "grannysparlor"),
+        user=os.environ.get("DB_USER", "grannysparlor"),
+        password=os.environ.get("DB_PASSWORD", "grannysparlor"),
     )
 
 

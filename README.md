@@ -1,7 +1,8 @@
-# GreenLeaf Bootcamp
+# Granny's Parlor Bootcamp
 
 > **DevOps exercise** — containerization, IaC, config management, and CI/CD.
-> Fictional client scenario. Not a real product.
+> Fictional client scenario — Granny's Parlor is a real place, but Maria
+> and her deployment troubles are invented for the exercise.
 
 ---
 
@@ -9,6 +10,11 @@
 
 A hands-on DevOps exercise built around a fun scenario. You'll take a working
 Flask application and deploy it to AWS — all within the Free Tier (zero cost).
+
+It's aimed at anyone who knows the basics of software but has never taken
+something all the way to "deployed on real infrastructure" — or who has done
+pieces of it and wants to see how they connect. Fork it, work through it,
+teach with it.
 
 No deadlines. No pressure. Work at your own pace, take breaks, come back when
 you feel like it. This is about exploring and learning, not racing.
@@ -21,13 +27,13 @@ Here's the setup — you've been approached by a small startup:
 
 ---
 
-**From:** Maria @ GreenLeaf Recipes
+**From:** Maria @ Granny's Parlor Recipes
 **Date:** July 2026
 **Subject:** We need our recipe app online — help?
 
 Hi,
 
-We're GreenLeaf — a small startup building a recipe sharing platform. Our
+We're Granny's Parlor — a small startup building a recipe sharing platform. Our
 developer built the backend in Python but left last week and we need to get it
 online ASAP. We have the code but no idea how to deploy it.
 
@@ -108,9 +114,9 @@ app/
 |----------|---------|---------|
 | `DB_HOST` | `localhost` | Postgres host |
 | `DB_PORT` | `5432` | Postgres port |
-| `DB_NAME` | `greenleaf` | Database name |
-| `DB_USER` | `greenleaf` | Database user |
-| `DB_PASSWORD` | `greenleaf` | Database password |
+| `DB_NAME` | `grannysparlor` | Database name |
+| `DB_USER` | `grannysparlor` | Database user |
+| `DB_PASSWORD` | `grannysparlor` | Database password |
 
 ---
 
@@ -119,7 +125,7 @@ app/
 Everything outside `app/` is yours to create:
 
 ```
-greenleaf-bootcamp/
+grannysparlor-bootcamp/
 ├── app/                    # PROVIDED — don't modify
 ├── docker/                 # PHASE 1 — you build
 │   ├── Dockerfile
@@ -216,4 +222,5 @@ Put your response in `CLIENT_RESPONSE.md`.
 
 ## License
 
-This is a private exercise repository. Not for distribution.
+[MIT](./LICENSE) — fork it, learn from it, teach with it. If it helps you,
+that's what it's for.

@@ -58,7 +58,7 @@ builds, pushes, and deploys — all triggered by a `git push`.
 
 Don't use your Docker Hub password. Create an access token:
 - Docker Hub → Account Settings → Security → New Access Token
-- Name it `greenleaf-cicd`
+- Name it `grannysparlor-cicd`
 - Copy the token — you'll only see it once
 - Put it in GitHub Actions secrets as `DOCKERHUB_TOKEN`
 
