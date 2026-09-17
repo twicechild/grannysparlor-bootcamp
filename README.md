@@ -222,5 +222,5 @@ Put your response in `CLIENT_RESPONSE.md`.
 
 ## License
 
-[MIT](./LICENSE) — fork it, learn from it, teach with it. If it helps you,
+[MIT](./LICENSE.md) — fork it, learn from it, teach with it. If it helps you,
 that's what it's for.
